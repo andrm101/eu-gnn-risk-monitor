@@ -1,0 +1,80 @@
+<h2>Phase 2B — What connects two NUTS2 regions?</h2>
+<p class="subtitle">Edge type is the most fundamental graph design decision. It determines what the GNN can "learn" about neighbourhood effects.</p>
+
+<div class="options">
+  <div class="option" data-choice="spatial" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Spatial adjacency only (Recommended)</h3>
+      <p>Two NUTS2 regions are connected if they share a land border. Edge weight = 1 (unweighted) or inverse distance between centroids.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Standard in GNN-on-NUTS literature — directly comparable to published work</li>
+            <li>Derived automatically from the GISCO GeoJSON already in the project</li>
+            <li>Captures labour market spillovers and migration corridors realistically</li>
+            <li>Homogeneous graph → simpler GNN architecture (GCN, GraphSAGE)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Misses non-contiguous linkages (e.g. island regions, sea crossings)</li>
+            <li>Treats all borders equally — a DE/PL border ≠ a FR/LU border in economic terms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="spatial_econ" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Spatial adjacency + economic similarity edges</h3>
+      <p>Add a second edge type connecting the k=5 nearest neighbours in feature space (GDP, unemployment, IHPI). Two edge types → heterogeneous graph.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Captures non-geographic linkages (e.g. Warsaw ↔ Prague economic cohesion)</li>
+            <li>Richer signal for GNN — can model "structural equivalence" across EU</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Requires a heterogeneous GNN (R-GCN, HAN) — more complex Phase 3</li>
+            <li>kNN in feature space is sensitive to feature scaling and choice</li>
+            <li>Harder to explain in methodology section</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="spatial_weighted" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Spatial adjacency with weighted edges</h3>
+      <p>Shared-border adjacency, but edge weight = f(shared border length, centroid distance). Homogeneous weighted graph.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>More nuanced than binary adjacency — long shared borders = stronger link</li>
+            <li>Still a homogeneous graph → simpler GNN</li>
+            <li>Border length derivable from GISCO shapefile</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Marginal gain over unweighted in most GNN benchmarks</li>
+            <li>Border length computation adds non-trivial geopandas intersection logic</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

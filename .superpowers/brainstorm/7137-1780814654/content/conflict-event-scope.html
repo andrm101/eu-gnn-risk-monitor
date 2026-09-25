@@ -1,0 +1,67 @@
+<h2>conflict_density: which events count as "conflict"?</h2>
+<p class="subtitle">The ACLED file has four disorder types. Choosing scope changes what the GNN learns to associate with risk.</p>
+
+<div class="options">
+  <div class="option" data-choice="pv_only" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Political Violence only (Recommended)</h3>
+      <p><strong>23,332 rows</strong> — Battles, explosions, violence against civilians, riots with casualties.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Closest to the intuitive meaning of "conflict risk" — physical harm events</li>
+            <li>Methodologically clean: matches UCDP/GED definition of organized violence</li>
+            <li>Signal is meaningful: EU regions normally have very low values, spikes are real</li>
+            <li>Defensible in methods section as "physical conflict exposure"</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Misses social instability signals (strikes, large protests) that precede violence</li>
+            <li>Low variance for most Western EU regions (many near-zero values)</li>
+          </ul>
+        </div>
+      </div>
+      <p><em>Key 2022 spike: Ukraine war border events inflate PL, RO, SK, HU readings — exactly the signal we want CEI to capture.</em></p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="pv_plus_demos" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Political Violence + Demonstrations</h3>
+      <p><strong>~106,000 rows</strong> — Adds protests, strikes, peaceful and violent demonstrations.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Captures social unrest that precedes violence (Yellow Vests → Gilets jaunes → actual riots)</li>
+            <li>More variance across Western EU (France, Germany have high protest activity)</li>
+            <li>Richer leading-indicator signal for GNN</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>France and Germany dominate the signal — 60%+ of protest rows are these two countries</li>
+            <li>Conflates "vibrant democracy" with "instability" — Paris protests ≠ Kyiv shelling</li>
+            <li>Harder to explain in a thesis without explicit weighting scheme</li>
+          </ul>
+        </div>
+      </div>
+      <p><em>If choosing B, would weight political violence events 3× vs. demonstrations to preserve signal hierarchy.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px; padding:12px; background:#1a1a2e; border-radius:8px; border-left:3px solid #6c63ff;">
+  <h3>Data note — regardless of choice</h3>
+  <ul>
+    <li><strong>Coverage:</strong> 2018–2023 only (6 years). conflict_density will be NaN in the panel for 2010–2017.</li>
+    <li><strong>ADMIN1 → NUTS2:</strong> centroid spatial join via geopandas. France/Germany ADMIN1 units are NUTS1-sized → multiple NUTS2 get the same value per parent region.</li>
+    <li><strong>Normalization:</strong> events / panel population × 100,000 (not ACLED's POPULATION_EXPOSURE).</li>
+  </ul>
+</div>

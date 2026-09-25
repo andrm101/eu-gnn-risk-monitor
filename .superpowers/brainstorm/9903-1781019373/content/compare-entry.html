@@ -1,0 +1,156 @@
+<h2>How does Comparison Mode activate?</h2>
+<p class="subtitle">The current dashboard has 3 panels: map | time series | ranking. Where does compare mode live?</p>
+
+<div class="options" style="flex-direction: column; gap: 20px;">
+
+  <!-- Option A -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">A</div>
+      <div>
+        <h3 style="margin:0">In-place: click a second region to compare</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">Click any region while one is already selected → compare mode activates inline</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; margin-bottom:4px; font-size:10px; display:flex; justify-content:space-between;">
+          <span style="color:#f9fafb;">EU NUTS2 Risk Monitor</span>
+          <span style="color:#6b7280;">⚡ Compare mode: PT15 vs SK01</span>
+        </div>
+        <div style="display:flex; gap:4px; height:120px;">
+          <div style="flex:2; background:#1a2035; border-radius:4px; border:1px solid #374151; position:relative;">
+            <div style="position:absolute; top:4px; left:4px; font-size:9px; color:#4b5563;">Map — PT15 highlighted red, SK01 highlighted blue</div>
+            <div style="display:flex; align-items:center; justify-content:center; height:100%; color:#374151; font-size:10px;">🗺 EU choropleth</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#ef4444; margin-bottom:2px; font-weight:bold;">PT15 Algarve</div>
+            <div style="color:#3b82f6; margin-bottom:4px; font-weight:bold;">SK01 Bratislava</div>
+            <div style="height:50px; background:#111827; border-radius:2px; display:flex; align-items:flex-end; padding:2px; gap:0.5px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:90%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:75%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:70%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:40%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px; margin-top:4px;">Both trajectories + gap area</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:4px;">Head-to-Head</div>
+            <div style="color:#9ca3af; font-size:8px;">Peak rank: #1 vs #2</div>
+            <div style="color:#9ca3af; font-size:8px;">Peak year: 2015 vs 2013</div>
+            <div style="color:#9ca3af; font-size:8px;">Shared neighbours: 0</div>
+            <div style="color:#9ca3af; font-size:8px; margin-top:4px;">Max gap: 0.045 (2015)</div>
+            <div style="color:#9ca3af; font-size:8px;">Avg gap: 0.018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>No navigation needed — stays in existing layout</li><li>Map shows both highlighted simultaneously</li><li>Natural workflow: click, then click again to compare</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Time series panel must handle dual-region mode</li><li>Need clear visual indicator that compare mode is active</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">B</div>
+      <div>
+        <h3 style="margin:0">Dedicated Compare Panel (replaces right sidebar)</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">A "Compare" button in the ranking panel opens a dedicated compare view replacing the ranking panel</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; margin-bottom:4px; font-size:10px; display:flex; gap:12px;">
+          <span style="color:#f9fafb;">EU NUTS2 Risk Monitor</span>
+          <span style="background:#374151; padding:1px 6px; border-radius:3px; color:#60a5fa; font-size:9px;">⚖ Compare Mode</span>
+        </div>
+        <div style="display:flex; gap:4px; height:120px;">
+          <div style="flex:2; background:#1a2035; border-radius:4px; border:1px solid #374151; display:flex; align-items:center; justify-content:center; color:#374151; font-size:10px;">🗺 Map (PT15 + SK01 highlighted)</div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:2px;">Time Series</div>
+            <div style="height:60px; background:#111827; border-radius:2px; display:flex; align-items:flex-end; padding:2px; gap:0.5px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:90%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:75%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px; margin-top:2px;">PT15 + SK01 overlaid</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:4px;">⚖ Compare</div>
+            <div style="display:flex; gap:4px; margin-bottom:4px;">
+              <div style="flex:1; background:#111827; border-radius:2px; padding:4px; text-align:center; color:#ef4444; font-size:8px;">PT15<br/>Algarve<br/>#1</div>
+              <div style="flex:1; background:#111827; border-radius:2px; padding:4px; text-align:center; color:#3b82f6; font-size:8px;">SK01<br/>Bratislava<br/>#2</div>
+            </div>
+            <div style="color:#9ca3af; font-size:8px;">Peak gap · Shared GNN neighbours · Score delta</div>
+            <div style="color:#6b7280; font-size:8px; margin-top:4px;">← Back to ranking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Clean separation — ranking panel and compare panel are distinct modes</li><li>Compare panel has dedicated space for stats without crowding</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Loses the ranking list while comparing</li><li>Extra navigation step (button → compare panel → back)</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">C</div>
+      <div>
+        <h3 style="margin:0">Full-screen Compare View (separate route)</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">A dedicated /compare page — wide dual-chart layout, detailed stats table, clean academic look</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; margin-bottom:4px; font-size:10px; display:flex; gap:12px;">
+          <span style="color:#f9fafb;">← Back to dashboard</span>
+          <span style="color:#60a5fa; font-weight:bold;">Region Comparison: PT15 vs SK01</span>
+        </div>
+        <div style="display:flex; gap:4px; height:120px;">
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#ef4444; font-weight:bold; margin-bottom:2px;">PT15 Algarve · Portugal</div>
+            <div style="height:55px; background:#111827; border-radius:2px; display:flex; align-items:flex-end; padding:2px; gap:0.5px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:90%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:70%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px; margin-top:2px;">Peak rank: #1 · Peak year: 2015</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#3b82f6; font-weight:bold; margin-bottom:2px;">SK01 Bratislava · Slovakia</div>
+            <div style="height:55px; background:#111827; border-radius:2px; display:flex; align-items:flex-end; padding:2px; gap:0.5px;">
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:75%"></div>
+              <div style="flex:1; background:#3b82f6; border-radius:1px; height:40%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px; margin-top:2px;">Peak rank: #2 · Peak year: 2013</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; border:1px solid #374151; font-size:9px;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:4px;">Gap Analysis</div>
+            <div style="height:55px; background:#111827; border-radius:2px; display:flex; align-items:center; justify-content:center;">
+              <div style="width:90%; height:30px; background:linear-gradient(to top, #374151, transparent); border-bottom:1px solid #ef4444; position:relative;">
+                <div style="position:absolute; bottom:0; width:100%; height:40%; background:rgba(59,130,246,0.2);"></div>
+              </div>
+            </div>
+            <div style="color:#6b7280; font-size:8px; margin-top:2px;">Score gap 2010–2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Most space for detailed stats and dual charts</li><li>Best for academic presentation / screenshot export</li><li>Clean URL (/compare?a=PT15&b=SK01) — shareable</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Requires React Router or hash routing</li><li>More navigation away from the main dashboard</li></ul></div>
+    </div>
+  </div>
+
+</div>

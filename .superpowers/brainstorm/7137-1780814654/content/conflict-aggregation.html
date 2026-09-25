@@ -1,0 +1,90 @@
+<h2>Conflict Data: How to get from raw events → NUTS2?</h2>
+<p class="subtitle">ACLED provides events with lat/lon. Two approaches to aggregate to NUTS2 level.</p>
+
+<div class="options">
+  <div class="option" data-choice="spatial" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Spatial Join (Recommended)</h3>
+      <p>Download ACLED CSV + Eurostat NUTS2 shapefiles → <code>geopandas</code> point-in-polygon → exact NUTS2 assignment per event → aggregate to density.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Academically defensible — events assigned to correct region</li>
+            <li>Works for cross-border regions and small countries (e.g. BE/NL/LU)</li>
+            <li>Enables future spatial analysis (distance to border, cluster maps)</li>
+            <li>Reuses Eurostat shapefile for Phase 2B graph construction</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Requires <code>geopandas</code> + <code>pyogrio</code> in environment.yml</li>
+            <li>Shapefile join adds ~3–5 min to pipeline runtime</li>
+            <li>More complex script to implement and test</li>
+          </ul>
+        </div>
+      </div>
+      <p><strong>Pipeline:</strong> ACLED CSV → <code>gpd.sjoin</code> with NUTS2 shapefile → <code>groupby nuts2_code</code> → events/100k</p>
+      <p><strong>Needs:</strong> ACLED Europe CSV (manual export) + NUTS2 shapefile (Eurostat bulk download)</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="country" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Country-Proportional Allocation</h3>
+      <p>Download ACLED CSV → aggregate to country × year → distribute to NUTS2 proportionally by population share.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>No shapefile or geopandas needed</li>
+            <li>Faster to implement and test</li>
+            <li>Simpler pipeline — pure pandas</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Methodologically weak — assumes uniform conflict distribution within a country</li>
+            <li>Misrepresents reality: e.g. Ukraine border events assigned equally to all Polish NUTS2</li>
+            <li>Undermines CEI signal — a German fab 20km from Ukraine border looks same as Munich</li>
+            <li>Hard to defend in a thesis methods section</li>
+          </ul>
+        </div>
+      </div>
+      <p><strong>Pipeline:</strong> ACLED CSV → <code>groupby country, year</code> → merge NUTS2 population shares → events/100k</p>
+      <p><strong>Needs:</strong> ACLED Europe CSV only</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>What to download (both approaches need ACLED)</h3>
+  <table style="width:100%; border-collapse:collapse; font-size:0.9em; margin-top:8px;">
+    <thead>
+      <tr style="background:#2a2a3a; color:#e0e0ff;">
+        <th style="padding:8px; text-align:left;">Dataset</th>
+        <th style="padding:8px; text-align:left;">Source</th>
+        <th style="padding:8px; text-align:left;">Format</th>
+        <th style="padding:8px; text-align:left;">Needed for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #333;">
+        <td style="padding:8px;">ACLED Europe 2010–2023 (all event types)</td>
+        <td style="padding:8px;">acleddata.com → Export → Region: Europe → Date range</td>
+        <td style="padding:8px;">CSV (~200k rows)</td>
+        <td style="padding:8px;">Both A and B</td>
+      </tr>
+      <tr style="border-bottom:1px solid #333;">
+        <td style="padding:8px;">NUTS2 2021 shapefile (EPSG:4326)</td>
+        <td style="padding:8px;">Eurostat GISCO → Shapefiles → NUTS 2021 → Level 2 → 1:1M</td>
+        <td style="padding:8px;">.shp / .gpkg</td>
+        <td style="padding:8px;">A only</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

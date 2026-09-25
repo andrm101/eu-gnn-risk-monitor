@@ -1,0 +1,143 @@
+<h2>Dashboard Layout — Pick One</h2>
+<p class="subtitle">All three use dark theme, NUTS2 choropleth, year slider, and right-side region detail panel.</p>
+
+<div class="options" style="flex-direction: column; gap: 24px;">
+
+  <!-- Option A -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">A</div>
+      <div>
+        <h3 style="margin:0">RO-style: Map + Fixed Sidebar</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">Proven layout from the RO project — minimal adaptation needed</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; color:#f9fafb; margin-bottom:4px; font-size:10px;">⬛ EU NUTS2 Risk Monitor &nbsp;|&nbsp; GNN Anomaly Detection 2010–2023</div>
+        <div style="background:#1f2937; padding:4px 8px; margin-bottom:4px; font-size:10px; color:#60a5fa; display:flex; gap:16px;">
+          <span>🌍 242 regions</span><span>🔴 Peak: PT15 (rank 1)</span><span>📅 2015 most anomalous</span>
+          <span style="margin-left:auto;">2010 ━━━●━━━━━━ 2023 &nbsp; ▶</span>
+        </div>
+        <div style="display:flex; gap:4px; height:140px;">
+          <div style="flex:1; background:#1a2035; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#4b5563; font-size:10px; border:1px solid #374151;">
+            🗺 EU choropleth map<br/>(NUTS2, anomaly colour scale)
+          </div>
+          <div style="width:180px; background:#1f2937; border-radius:4px; padding:6px; font-size:9px; border:1px solid #374151;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:4px;">PT15 Algarve</div>
+            <div style="color:#9ca3af;">Rank: #1 &nbsp; Peak: 2015</div>
+            <div style="height:50px; background:#111827; border-radius:2px; margin:4px 0; display:flex; align-items:flex-end; padding:2px; gap:1px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:20%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:40%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:30%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:25%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:15%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px;">Anomaly score 2010–2023</div>
+            <div style="margin-top:6px; color:#9ca3af; font-size:8px;">── Spatial neighbours avg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Directly inherits RO layout (~60% reuse)</li><li>Clean, focused on map + selection</li><li>Sidebar scrolls independently</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Ranking panel not immediately visible</li><li>Less dramatic visually</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">B</div>
+      <div>
+        <h3 style="margin:0">Three-Panel: Map | Time Series | Ranking</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">All analytical views visible simultaneously — no tabs, no scrolling</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; color:#f9fafb; margin-bottom:4px; font-size:10px;">⬛ EU NUTS2 Risk Monitor &nbsp;|&nbsp; 2010 ━━━●━━━━━━ 2023 &nbsp; ▶</div>
+        <div style="display:flex; gap:4px; height:160px;">
+          <div style="flex:2; background:#1a2035; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#4b5563; font-size:10px; border:1px solid #374151;">
+            🗺 EU choropleth<br/>(main panel, ~50% width)
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; font-size:9px; border:1px solid #374151; display:flex; flex-direction:column; gap:4px;">
+            <div style="color:#60a5fa; font-weight:bold;">PT15 — Time Series</div>
+            <div style="flex:1; background:#111827; border-radius:2px; display:flex; align-items:flex-end; padding:2px; gap:1px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:20%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:45%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:30%"></div>
+              <div style="flex:1; background:#f59e0b; border-radius:1px; height:20%"></div>
+              <div style="flex:1; background:#f59e0b; border-radius:1px; height:15%"></div>
+            </div>
+            <div style="color:#6b7280; font-size:8px;">+ 3 neighbour lines</div>
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; font-size:9px; border:1px solid #374151;">
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:4px;">Top Risk Regions</div>
+            <div style="color:#ef4444;">1. PT15 Algarve &nbsp; 0.207</div>
+            <div style="color:#f97316;">2. SK01 Bratislava &nbsp; 0.178</div>
+            <div style="color:#f97316;">3. IE05 &nbsp; 0.171</div>
+            <div style="color:#fbbf24;">4. HU10 &nbsp; 0.163</div>
+            <div style="color:#fbbf24;">5. BG41 &nbsp; 0.158</div>
+            <div style="color:#9ca3af; font-size:8px; margin-top:4px;">…20 more</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>All views visible at once — best for exploration</li><li>Map, time series, ranking always synced</li><li>Strongest academic presentation layout</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Map gets less space (~50% width)</li><li>More layout code to write</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">C</div>
+      <div>
+        <h3 style="margin:0">Hero Map + Tabbed Sidebar</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">Full-width map hero; sidebar switches between Region Detail, Ranking, and Country tabs</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Layout Preview</div>
+      <div class="mockup-body" style="padding:8px; background:#111827; font-size:11px; font-family:monospace; color:#9ca3af;">
+        <div style="background:#1f2937; padding:4px 8px; color:#f9fafb; margin-bottom:4px; font-size:10px;">⬛ EU NUTS2 Risk Monitor &nbsp;|&nbsp; 2010 ━━━●━━━━━━ 2023 &nbsp; ▶</div>
+        <div style="display:flex; gap:4px; height:160px;">
+          <div style="flex:3; background:#1a2035; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#4b5563; font-size:10px; border:1px solid #374151;">
+            🗺 EU choropleth<br/>(large map, ~65% width)
+          </div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:6px; font-size:9px; border:1px solid #374151;">
+            <div style="display:flex; gap:2px; margin-bottom:6px; font-size:8px;">
+              <span style="background:#3b82f6; color:white; padding:1px 4px; border-radius:2px;">Region</span>
+              <span style="color:#6b7280; padding:1px 4px;">Ranking</span>
+              <span style="color:#6b7280; padding:1px 4px;">Country</span>
+            </div>
+            <div style="color:#60a5fa; font-weight:bold; margin-bottom:2px;">PT15 Algarve</div>
+            <div style="color:#9ca3af;">Rank #1 · Portugal</div>
+            <div style="height:60px; background:#111827; border-radius:2px; margin:4px 0; display:flex; align-items:flex-end; padding:2px; gap:1px;">
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:20%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:40%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:100%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:60%"></div>
+              <div style="flex:1; background:#ef4444; border-radius:1px; height:30%"></div>
+            </div>
+            <div style="color:#9ca3af; font-size:8px; margin-top:4px;">Peak year: 2015</div>
+            <div style="color:#6b7280; font-size:8px;">Score: 0.207</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Largest map area of the three</li><li>Tabs keep sidebar compact but feature-complete</li><li>Closest to a "product" feel</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Ranking and country views hidden behind tabs — less immediate</li><li>Tab switching adds interaction cost</li></ul></div>
+    </div>
+  </div>
+
+</div>

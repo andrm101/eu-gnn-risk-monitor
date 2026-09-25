@@ -1,0 +1,202 @@
+<h2>What does the Compare Panel show?</h2>
+<p class="subtitle">Right sidebar swaps from Ranking → Compare when activated. What content goes inside it?</p>
+
+<div class="options" style="flex-direction: column; gap: 20px;">
+
+  <!-- Option A: Stats-focused -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">A</div>
+      <div>
+        <h3 style="margin:0">Stats-first: head-to-head summary table</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">Region pickers at top, then a structured stats comparison. Map + time series panel already show trajectories — panel gives the "scorecard"</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Compare Panel — Stats-first</div>
+      <div class="mockup-body" style="padding:10px; background:#111827; font-size:10px; font-family:monospace; color:#9ca3af; min-height:260px;">
+        <!-- Region pickers -->
+        <div style="display:flex; gap:4px; margin-bottom:10px;">
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:5px; border:1px solid #ef4444;">
+            <div style="color:#ef4444; font-size:8px; margin-bottom:2px;">Region A</div>
+            <div style="color:#f9fafb; font-size:11px; font-weight:bold;">PT15</div>
+            <div style="color:#6b7280; font-size:8px;">Algarve · Portugal</div>
+          </div>
+          <div style="color:#6b7280; display:flex; align-items:center; font-size:14px; padding:0 2px;">⇄</div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:5px; border:1px solid #3b82f6;">
+            <div style="color:#3b82f6; font-size:8px; margin-bottom:2px;">Region B</div>
+            <div style="color:#f9fafb; font-size:11px; font-weight:bold;">SK01</div>
+            <div style="color:#6b7280; font-size:8px;">Bratislava · Slovakia</div>
+          </div>
+        </div>
+
+        <!-- Stats table -->
+        <div style="background:#1f2937; border-radius:4px; overflow:hidden; margin-bottom:8px;">
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; background:#374151; padding:3px 6px; font-size:8px; color:#60a5fa;">
+            <span>Metric</span><span style="text-align:center;">PT15</span><span style="text-align:center;">SK01</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; padding:3px 6px; font-size:9px; border-bottom:1px solid #374151;">
+            <span style="color:#6b7280;">Peak rank</span>
+            <span style="text-align:center; color:#ef4444; font-weight:bold;">#1</span>
+            <span style="text-align:center; color:#3b82f6; font-weight:bold;">#2</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; padding:3px 6px; font-size:9px; border-bottom:1px solid #374151; background:#1a2035;">
+            <span style="color:#6b7280;">Peak year</span>
+            <span style="text-align:center; color:#f9fafb;">2015</span>
+            <span style="text-align:center; color:#f9fafb;">2013</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; padding:3px 6px; font-size:9px; border-bottom:1px solid #374151;">
+            <span style="color:#6b7280;">Peak score</span>
+            <span style="text-align:center; color:#f9fafb;">0.2847</span>
+            <span style="text-align:center; color:#f9fafb;">0.2701</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; padding:3px 6px; font-size:9px; border-bottom:1px solid #374151; background:#1a2035;">
+            <span style="color:#6b7280;">Avg score</span>
+            <span style="text-align:center; color:#f9fafb;">0.1923</span>
+            <span style="text-align:center; color:#f9fafb;">0.1574</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 80px 80px; padding:3px 6px; font-size:9px;">
+            <span style="color:#6b7280;">Max gap year</span>
+            <span style="text-align:center; color:#fbbf24; font-size:8px; grid-column:2/4; text-align:center;">2015 (Δ 0.0428)</span>
+          </div>
+        </div>
+
+        <!-- GNN neighbours -->
+        <div style="background:#1f2937; border-radius:4px; padding:6px; margin-bottom:8px;">
+          <div style="color:#60a5fa; font-size:8px; font-weight:bold; margin-bottom:4px;">GNN Graph Neighbours</div>
+          <div style="color:#6b7280; font-size:8px; margin-bottom:3px;">Shared: <span style="color:#4ade80;">0</span> · PT15-only: 4 · SK01-only: 3</div>
+          <div style="display:flex; gap:2px; flex-wrap:wrap;">
+            <div style="background:#374151; padding:1px 4px; border-radius:2px; font-size:7px; color:#ef4444;">PT17</div>
+            <div style="background:#374151; padding:1px 4px; border-radius:2px; font-size:7px; color:#ef4444;">PT18</div>
+            <div style="background:#374151; padding:1px 4px; border-radius:2px; font-size:7px; color:#3b82f6;">SK02</div>
+            <div style="background:#374151; padding:1px 4px; border-radius:2px; font-size:7px; color:#3b82f6;">AT13</div>
+          </div>
+        </div>
+
+        <!-- Back button -->
+        <div style="color:#6b7280; font-size:8px; cursor:pointer;">← Back to ranking</div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Dense, scannable — tells you everything at a glance</li><li>No extra chart — time series panel already shows trajectories</li><li>Easy to implement (no extra Recharts chart component)</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>No gap chart — divergence is harder to read from a table</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option B: Chart-focused -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">B</div>
+      <div>
+        <h3 style="margin:0">Chart-first: gap area chart + compact stats</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">A shaded gap chart (A above B) fills the panel, with a compact row of stats below it</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Compare Panel — Chart-first</div>
+      <div class="mockup-body" style="padding:10px; background:#111827; font-size:10px; font-family:monospace; color:#9ca3af; min-height:260px;">
+        <!-- Region pickers -->
+        <div style="display:flex; gap:4px; margin-bottom:8px;">
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:4px; border:1px solid #ef4444; font-size:9px; color:#ef4444; font-weight:bold; text-align:center;">PT15 Algarve</div>
+          <div style="color:#6b7280; display:flex; align-items:center;">vs</div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:4px; border:1px solid #3b82f6; font-size:9px; color:#3b82f6; font-weight:bold; text-align:center;">SK01 Bratislava</div>
+        </div>
+
+        <!-- Gap chart -->
+        <div style="background:#1f2937; border-radius:4px; padding:6px; margin-bottom:8px; height:110px; position:relative;">
+          <div style="color:#6b7280; font-size:8px; margin-bottom:4px;">Score gap 2010–2023</div>
+          <svg width="100%" height="80" viewBox="0 0 200 70" preserveAspectRatio="none">
+            <!-- Grid lines -->
+            <line x1="0" y1="35" x2="200" y2="35" stroke="#374151" stroke-width="0.5"/>
+            <line x1="0" y1="0" x2="200" y2="0" stroke="#374151" stroke-width="0.5"/>
+            <line x1="0" y1="70" x2="200" y2="70" stroke="#374151" stroke-width="0.5"/>
+            <!-- PT15 line (red, higher) -->
+            <polyline points="0,55 14,50 28,42 42,28 56,15 70,10 84,20 98,30 112,40 126,45 140,48 154,50 168,52 182,53 196,54"
+              fill="none" stroke="#ef4444" stroke-width="1.5"/>
+            <!-- SK01 line (blue, lower) -->
+            <polyline points="0,60 14,55 28,48 42,40 56,32 70,28 84,38 98,45 112,50 126,54 140,56 154,58 168,59 182,60 196,61"
+              fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+            <!-- Gap fill between them -->
+            <polygon points="0,55 14,50 28,42 42,28 56,15 70,10 84,20 98,30 112,40 126,45 140,48 154,50 168,52 182,53 196,54 196,61 182,60 168,59 154,58 140,56 126,54 112,50 98,45 84,38 70,28 56,32 42,40 28,48 14,55 0,60"
+              fill="rgba(251,191,36,0.15)" stroke="none"/>
+            <!-- Max gap marker -->
+            <line x1="70" y1="5" x2="70" y2="65" stroke="#fbbf24" stroke-width="0.8" stroke-dasharray="2,2"/>
+            <text x="72" y="12" fill="#fbbf24" font-size="6">max gap</text>
+          </svg>
+        </div>
+
+        <!-- Compact stats row -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:4px; margin-bottom:8px;">
+          <div style="background:#1f2937; border-radius:3px; padding:4px; text-align:center;">
+            <div style="color:#fbbf24; font-size:9px; font-weight:bold;">Δ 0.0428</div>
+            <div style="color:#6b7280; font-size:7px;">max gap (2015)</div>
+          </div>
+          <div style="background:#1f2937; border-radius:3px; padding:4px; text-align:center;">
+            <div style="color:#f9fafb; font-size:9px; font-weight:bold;">0 shared</div>
+            <div style="color:#6b7280; font-size:7px;">GNN neighbours</div>
+          </div>
+          <div style="background:#1f2937; border-radius:3px; padding:4px; text-align:center;">
+            <div style="color:#f9fafb; font-size:9px; font-weight:bold;">#1 vs #2</div>
+            <div style="color:#6b7280; font-size:7px;">peak ranks</div>
+          </div>
+        </div>
+
+        <div style="color:#6b7280; font-size:8px;">← Back to ranking</div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Gap chart is the most visually distinctive new element</li><li>Shows divergence patterns you can't see in the time series panel</li><li>Compact — fits cleanly in the sidebar width</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Less detailed stats — just 3 KPI chips</li><li>Need a new Recharts/SVG component for the gap chart</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Option C: Both -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)" style="flex-direction: column; align-items: flex-start; padding: 16px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div class="letter">C</div>
+      <div>
+        <h3 style="margin:0">Full: gap chart + full stats table + neighbours</h3>
+        <p style="margin:0; font-size:13px; opacity:0.7">Everything: gap chart on top, stats table in the middle, GNN neighbours below — scrollable sidebar</p>
+      </div>
+    </div>
+    <div class="mockup" style="width:100%; padding:0; overflow:hidden;">
+      <div class="mockup-header">Compare Panel — Full (scrollable)</div>
+      <div class="mockup-body" style="padding:10px; background:#111827; font-size:10px; font-family:monospace; color:#9ca3af; min-height:260px;">
+        <!-- Pickers + chart + stats + neighbours -->
+        <div style="display:flex; gap:4px; margin-bottom:6px;">
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:3px; border:1px solid #ef4444; font-size:8px; color:#ef4444; text-align:center;">PT15 Algarve</div>
+          <div style="color:#6b7280; display:flex; align-items:center; font-size:8px;">vs</div>
+          <div style="flex:1; background:#1f2937; border-radius:4px; padding:3px; border:1px solid #3b82f6; font-size:8px; color:#3b82f6; text-align:center;">SK01 Bratislava</div>
+        </div>
+        <!-- mini chart -->
+        <div style="background:#1f2937; border-radius:4px; padding:4px; margin-bottom:6px; height:60px; display:flex; align-items:center; justify-content:center; color:#374151; font-size:8px;">Gap chart (A above B, shaded area)</div>
+        <!-- mini table -->
+        <div style="background:#1f2937; border-radius:4px; padding:4px; margin-bottom:6px; font-size:8px;">
+          <div style="color:#60a5fa; margin-bottom:3px;">Head-to-Head Stats</div>
+          <div style="display:grid; grid-template-columns: 1fr 50px 50px; gap:1px; font-size:7px; color:#9ca3af;">
+            <span>Peak rank</span><span style="color:#ef4444; text-align:center;">#1</span><span style="color:#3b82f6; text-align:center;">#2</span>
+            <span>Peak year</span><span style="text-align:center;">2015</span><span style="text-align:center;">2013</span>
+            <span>Peak score</span><span style="text-align:center;">0.2847</span><span style="text-align:center;">0.2701</span>
+            <span>Max Δ year</span><span style="color:#fbbf24; text-align:center; grid-column:2/4;">2015 (Δ 0.043)</span>
+          </div>
+        </div>
+        <!-- neighbours -->
+        <div style="background:#1f2937; border-radius:4px; padding:4px; font-size:7px; color:#6b7280;">
+          <span style="color:#60a5fa;">GNN neighbours</span> — Shared: 0 · PT15: 4 · SK01: 3<br/>
+          <div style="display:flex; gap:2px; flex-wrap:wrap; margin-top:3px;">
+            <span style="background:#374151; padding:1px 3px; border-radius:2px; color:#ef4444;">PT17</span>
+            <span style="background:#374151; padding:1px 3px; border-radius:2px; color:#ef4444;">PT18</span>
+            <span style="background:#374151; padding:1px 3px; border-radius:2px; color:#3b82f6;">SK02</span>
+            <span style="background:#374151; padding:1px 3px; border-radius:2px; color:#3b82f6;">AT13</span>
+          </div>
+        </div>
+        <div style="color:#6b7280; font-size:8px; margin-top:6px;">← Back to ranking</div>
+      </div>
+    </div>
+    <div class="pros-cons" style="width:100%; margin-top:8px;">
+      <div class="pros"><h4>Pros</h4><ul><li>Complete picture in one panel</li><li>Good for academic use — everything visible, no clicks</li></ul></div>
+      <div class="cons"><h4>Cons</h4><ul><li>Densest layout — might feel crowded in the 288px sidebar</li><li>Most implementation work (chart + table + neighbours)</li></ul></div>
+    </div>
+  </div>
+
+</div>
