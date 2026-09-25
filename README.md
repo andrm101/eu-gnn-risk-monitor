@@ -4,7 +4,7 @@ A graph neural network pipeline for monitoring economic/political risk across EU
 
 ## Status
 
-Phase 1 (Data Foundation) is complete: regional panel construction, source ingestion (NMC v7, Maddison GDP, JST R6 loans/investment), and country code harmonization are in place. Phase 2/3 build out graph construction and GNN training.
+Phase 1 (Data Foundation) is complete: regional panel construction, source ingestion (NMC v7, Maddison GDP, JST R6 loans/investment), and country code harmonization are in place. Phase 2 (graph construction, `src/graph/`) and Phase 3 (GNN autoencoder training, `src/models/`) have working implementations and a trained checkpoint (`data/processed/gnn_model.pt`) and risk scores (`data/processed/nuts2_risk_scores.parquet`) already exist locally, though `data/processed/` is gitignored (generated artifacts), so a fresh clone must regenerate them — see "Running it" below.
 
 ## Architecture
 
@@ -29,6 +29,22 @@ flowchart TD
 | Phase 2a | `build_phase2a.py` | Intermediate feature/graph build step |
 | Phase 2b | `build_phase2b.py` | Second intermediate build step |
 | Training | `train_phase3.py` | GNN model training |
+
+## Running it
+
+Stages must run in order — each writes inputs the next stage requires under `data/processed/` (gitignored, so this must be re-run after a fresh clone):
+
+```bash
+conda env create -f environment.yml
+conda activate eu-gnn-risk
+
+python build_nuts2_panel.py   # -> data/processed/nuts2_panel.parquet
+python build_phase2a.py       # -> data/processed/nuts2_features.parquet
+python build_phase2b.py       # -> data/processed/nuts2_graph.pt, nuts2_temporal_features.pt, nuts2_node_index.parquet
+python train_phase3.py        # -> data/processed/gnn_model.pt, nuts2_risk_scores.parquet
+```
+
+Running `train_phase3.py` directly without the prior three steps will fail with a missing-file error, since it consumes their outputs.
 
 ## Dashboard
 
