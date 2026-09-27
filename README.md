@@ -2,6 +2,17 @@
 
 A graph neural network pipeline for monitoring economic/political risk across EU NUTS2 regions, built on a harmonized regional panel and a country-code bridge table (COW `stateabb` as canonical identifier).
 
+📖 **[Full methodology, architecture, and face-validity checks → project Wiki](https://github.com/andrm101/eu-gnn-risk-monitor/wiki)**
+
+## Results at a glance
+
+<p align="center">
+  <img src="figures/top10_anomaly_regions.png" width="48%" alt="Top 10 highest-anomaly NUTS2 regions" />
+  <img src="figures/anomaly_trajectories.png" width="48%" alt="Anomaly score trajectories, top 5 regions" />
+</p>
+
+Two of the top 5 highest-anomaly region-years peak in 2020 (COVID-19 shock) — the unsupervised model recovers a known macro shock without being told when it occurred. See the [wiki](https://github.com/andrm101/eu-gnn-risk-monitor/wiki) for the full face-validity writeup.
+
 ## Status
 
 Phase 1 (Data Foundation) is complete: regional panel construction, source ingestion (NMC v7, Maddison GDP, JST R6 loans/investment), and country code harmonization are in place. Phase 2 (graph construction, `src/graph/`) and Phase 3 (GNN autoencoder training, `src/models/`) have working implementations and a trained checkpoint (`data/processed/gnn_model.pt`) and risk scores (`data/processed/nuts2_risk_scores.parquet`) already exist locally, though `data/processed/` is gitignored (generated artifacts), so a fresh clone must regenerate them — see "Running it" below.
