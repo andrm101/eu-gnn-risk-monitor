@@ -1,4 +1,6 @@
-# EU GNN Risk Monitor
+<p align="center">
+  <img src="assets/brand-banner.svg" alt="EU GNN Risk Monitor" width="100%">
+</p>
 
 A graph neural network pipeline for monitoring economic/political risk across EU NUTS2 regions, built on a harmonized regional panel and a country-code bridge table (COW `stateabb` as canonical identifier).
 
